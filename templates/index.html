@@ -1,37 +1,41 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dados de Chuveiros - scrape</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Resultado de Busca</title>
 </head>
 <body>
-    <h1>Dados de Chuveiros - ProjetoFIS</h1>
-    <button onclick="window.location.href='/scrape';">Capturar Dados de Chuveiros</button>
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Valor</th>
-                <th>Vendedor</th>
-                <th>Parcelas e Valor</th>
-                <th>Avaliação</th>
-                <th>Cupons de Desconto</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for dado in dados %}
-            <tr>
-                <td>{{ dado['Nome'] }}</td>
-                <td>{{ dado['Valor'] }}</td>
-                <td>{{ dado['Vendedor'] }}</td>
-                <td>{{ dado['Parcelas e Valor'] }}</td>
-                <td>{{ dado['Avaliação'] }}</td>
-                <td>{{ dado['Cupons de Desconto'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1>Resultado de Busca</h1>
+    
+    <form action="/scrape" method="GET">
+        <label for="termo_busca">Pesquisa de produtos</label>
+        <input type="text" id="termo_busca" name="termo_busca" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <hr>
+
+    <div>
+        {% if dados %}
+            <ul>
+                {% for item in dados %}
+                    <li>
+                        <strong>Nome:</strong> {{ item['Nome'] }} <br>
+                        <strong>Valor:</strong> {{ item['Valor'] }} <br>
+                        <strong>Vendedor:</strong> {{ item['Vendedor'] }} <br>
+                        <strong>Parcelas e Valor:</strong> {{ item['Parcelas e Valor'] }} <br>
+                        <strong>Avaliação:</strong> {{ item['Avaliação'] }} <br>
+                        <strong>Cupons de Desconto:</strong> {{ item['Cupons de Desconto'] }} <br>
+                        <hr>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum resultado encontrado.</p>
+        {% endif %}
+    </div>
 </body>
 </html>

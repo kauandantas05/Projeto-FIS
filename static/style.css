@@ -8,12 +8,12 @@ table {
     margin-top: 20px;
 }
 th, td {
-    border: 1px solid #000000;
+    border: 1px solid #00ff0d;
     padding: 8px;
     text-align: left;
 }
 th {
-    background-color: #0dff00;
+    background-color: #000000;
 }
 button {
     margin-bottom: 10px;
